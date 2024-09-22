@@ -1,0 +1,65 @@
+<div class="container">
+  <div>
+    <h1 id="theCompanyText">The Company</h1>
+  </div>
+  <div>
+    <h2 id="calculatorText">Shipping Time Calculator</h2>
+  </div>
+  <div id="inputDiv">
+    <form [formGroup]="CForm" id="inputForm">
+      <div> <mat-form-field class="fieldC" >
+        <input matInput [matDatepicker]="myDatePicker" formControlName="date" [(ngModel)]="date">
+        <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #myDatePicker></mat-datepicker>
+        <mat-label class="inLabel">Order Date</mat-label>
+        <i></i>
+        <mat-error *ngIf="CForm.get('date')?.hasError('required')">
+          Please enter date
+        </mat-error>
+      </mat-form-field></div>
+
+<div><mat-form-field  class="fieldC">
+  <mat-select [(value)]="selectedValue" class="border-gradient"  formControlName="type" [(ngModel)]="type">
+   <mat-option value="Cotton">Cotton</mat-option>
+   <mat-option value="Linen">Linen</mat-option>
+  </mat-select>
+  <mat-label class="inLabel">Fabric Type</mat-label>
+   <mat-error *ngIf="CForm.get('type')?.hasError('required')">
+    Please select type
+ </mat-error>
+ </mat-form-field></div>
+
+<div><mat-form-field  class="fieldC">
+  <input matInput type="number"  formControlName="quantity" [min]="minQuantity" [max]="maxQuantity" [(ngModel)]="quantity">
+  <mat-label class="inLabel">Quantity
+  </mat-label>
+  <mat-error *ngIf="CForm.get('quantity')?.hasError('required')">
+    Please enter quantity
+</mat-error>
+<mat-error *ngIf="CForm.get('quantity')?.hasError('min')">
+  Quantity should be between 1 and 100
+</mat-error>
+<mat-error *ngIf="CForm.get('quantity')?.hasError('max')">
+  Quantity should be between 1 and 100
+</mat-error>
+</mat-form-field></div>
+
+    </form>
+    <div class="icon">
+      <div class="toolTip">Shipping dates may vary based on quantity</div>
+      <span><mat-icon style="margin-top: 15px;
+        margin-left: 15px;" class="IIcon" fontIcon="error"></mat-icon></span>
+    </div>
+  </div>
+
+  <div>
+    <button (click)="viewCalculate()" [disabled]="CForm.invalid" id="button">
+      Calculate
+    </button>
+    <div>
+      <h3 class="timeLabel">{{firstText}}</h3>
+    </div>
+  </div>
+</div>
+
+
